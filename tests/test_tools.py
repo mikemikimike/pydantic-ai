@@ -5063,3 +5063,11 @@ def test_tool_return_part_serializes_with_serialization_alias():
     # The wire output keys agree with the advertised return schema properties.
     assert set(json.loads(serialized_str)) == set(return_schema.get('properties', {}))
     assert set(serialized_obj) == set(return_schema.get('properties', {}))
+
+
+def test_tool_preserves_explicit_empty_description() -> None:
+    def documented_tool() -> None:
+        """This description should not be exposed when explicitly suppressed."""
+
+    assert Tool(documented_tool, description='').tool_def.description == ''
+    assert Tool(documented_tool, description=None).tool_def.description == documented_tool.__doc__
