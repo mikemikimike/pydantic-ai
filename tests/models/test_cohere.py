@@ -149,6 +149,7 @@ async def test_request_simple_success(allow_model_requests: None):
 
     result = await agent.run('hello')
     assert result.output == 'world'
+    assert result.response.provider_response_id == '123'
     assert result.usage == snapshot(RunUsage(requests=1, cost=Decimal('0.0000')))
 
     # reset the index so we get the same response again
@@ -173,6 +174,7 @@ async def test_request_simple_success(allow_model_requests: None):
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='123',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
@@ -191,6 +193,7 @@ async def test_request_simple_success(allow_model_requests: None):
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='123',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
@@ -364,6 +367,7 @@ async def test_request_structured_response(allow_model_requests: None):
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='123',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
@@ -463,6 +467,7 @@ async def test_request_tool_call(allow_model_requests: None):
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='123',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
@@ -499,6 +504,7 @@ async def test_request_tool_call(allow_model_requests: None):
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='123',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
@@ -524,6 +530,7 @@ async def test_request_tool_call(allow_model_requests: None):
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='123',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
@@ -702,6 +709,7 @@ async def test_cohere_model_instructions(allow_model_requests: None, co_api_key:
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='cf7be73f-dcee-4589-9eea-2dca902b27ec',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
@@ -803,6 +811,7 @@ async def test_cohere_model_thinking_part(allow_model_requests: None, co_api_key
                 provider_name='cohere',
                 provider_url='https://api.cohere.com',
                 provider_details={'finish_reason': 'COMPLETE'},
+                provider_response_id='a7a1995c-1980-4683-8382-e8dda3598388',
                 finish_reason='stop',
                 run_id=IsStr(),
                 conversation_id=IsStr(),
