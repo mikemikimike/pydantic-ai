@@ -134,7 +134,7 @@ class GoogleEmbeddingSettings(EmbeddingSettings, total=False):
     """
 
 
-@dataclass(init=False)
+@dataclass(init=False, eq=False)
 class GoogleEmbeddingModel(EmbeddingModel):
     """Google embedding model implementation.
 

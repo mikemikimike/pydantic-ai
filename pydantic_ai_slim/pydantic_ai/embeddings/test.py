@@ -24,7 +24,7 @@ def _estimate_tokens(text: str) -> int:
     return len(_TOKEN_SPLIT_RE.split(text.strip()))
 
 
-@dataclass(init=False)
+@dataclass(init=False, eq=False)
 class TestEmbeddingModel(EmbeddingModel):
     """A mock embedding model for testing.
 

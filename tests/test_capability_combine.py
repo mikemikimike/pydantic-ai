@@ -1353,6 +1353,23 @@ async def test_two_capabilities_supplied_for_one_run_merge_like_two_on_the_agent
     assert seen == snapshot([[WebSearchTool(search_context_size='low', max_uses=3)]])
 
 
+def test_model_settings_keep_distinct_fallback_models_when_capabilities_merge() -> None:
+    """Models with different defaults must not be collapsed as equal during a capability merge."""
+    first = TestModel(settings={'temperature': 0.0})
+    later = TestModel(settings={'temperature': 1.0})
+
+    assert first != later
+
+    merged = XSearch.combine(
+        [
+            XSearch(fallback_subagent_model=first),
+            XSearch(fallback_subagent_model=later),
+        ]
+    )
+
+    assert merged.fallback_subagent_model is later
+
+
 def test_mcp_takes_the_same_derived_id_as_the_toolset_it_contributes() -> None:
     """A server's identity is its URL, so the capability is named by it too, not just its leaf.
 

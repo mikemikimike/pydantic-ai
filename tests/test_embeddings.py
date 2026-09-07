@@ -45,6 +45,14 @@ pytestmark = [
     pytest.mark.usefixtures('allow_model_requests'),
 ]
 
+
+def test_embedding_model_settings_are_not_ignored_by_equality() -> None:
+    first = TestEmbeddingModel(settings={'dimensions': 128})
+    later = TestEmbeddingModel(settings={'dimensions': 256})
+
+    assert first != later
+
+
 with try_import() as logfire_imports_successful:
     from logfire.testing import CaptureLogfire
 
